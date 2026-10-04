@@ -12,6 +12,7 @@ import {
   isUnreadableImage,
 } from '../lib/contact'
 import {
+  describePrepareFailure,
   formatBytes,
   getImageFileError,
   inferImageOrigin,
@@ -177,8 +178,8 @@ export function ScanScreen({
 
     try {
       prepared = await prepareImageForOcr(image.file)
-    } catch {
-      setFileError('That image could not be opened. Please choose another one.')
+    } catch (error) {
+      setFileError(describePrepareFailure(error))
       setStage('preview')
       return
     }

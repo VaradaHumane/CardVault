@@ -8,6 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "npm run test:node && npm run test:browser",
+    "test:node": "node --test \"test/node/*.test.ts\"",
+    "test:browser": "node test/run-browser-tests.mjs",
     "icons": "node scripts/generate-icons.mjs",
     "sync:ocr": "node scripts/sync-ocr-assets.mjs"
   },
