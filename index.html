@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Green accent tints the browser and Android UI; the manifest uses the
+         same value with the beige background. The two must agree. -->
+    <meta name="theme-color" content="#2f6f4e" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="CardVault scans business cards and keeps your contacts in one place."
+    />
+
+    <!-- iOS reads these instead of the manifest when adding to the Home Screen,
+         so they are declared here as well as in the generated manifest. -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="CardVault" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="%BASE_URL%icons/apple-touch-icon.png" />
+
+    <!-- The manifest link is injected by vite-plugin-pwa at build time.
+         %BASE_URL% expands to the deployment base, so every reference above
+         stays correct whether the app is served from a domain apex or from a
+         sub-directory such as /cardvault/. -->
+    <title>CardVault</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

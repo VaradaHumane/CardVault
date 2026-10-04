@@ -1,0 +1,24 @@
+# Netlify configuration. CardVault's primary host is Cloudflare Pages; this file
+# exists so the documented fallback is a two-field setup rather than a project
+# rebuild. Cloudflare ignores this file.
+#
+# The response headers are not repeated here on purpose: `public/_headers` is
+# copied into `dist/` by the build and uses identical syntax on both providers,
+# so there is exactly one copy of the rules to keep correct.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# CardVault has no client-side routes: the three screens are tabs inside one
+# document and the URL never changes. The fallback below therefore only exists
+# to turn a mistyped or stale deep link into the app instead of a 404, and it is
+# deliberately a 200 rewrite rather than a redirect so the address bar is not
+# rewritten underneath the user.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

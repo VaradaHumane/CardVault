@@ -1,0 +1,152 @@
+:root {
+  --bg: #f6efe3;
+  --surface: #fffdf9;
+  --surface-sunken: #f1e9db;
+  --border: #e6dbc8;
+  --border-strong: #d5c5ab;
+
+  --text: #241f18;
+  --text-muted: #6c6254;
+
+  --accent: #2f6f4e;
+  --accent-strong: #245a40;
+  --accent-tint: #e7f0e9;
+  --accent-contrast: #ffffff;
+  --accent-border: #b9d3c3;
+
+  /* Warm, muted status colours that sit inside the beige palette. */
+  --warning-bg: #fbf1de;
+  --warning-border: #e6d3ab;
+  --warning-text: #8a6320;
+
+  --error-bg: #f9e8e3;
+  --error-border: #e6c3b8;
+  --error-text: #9c3f2b;
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(74, 58, 32, 0.06);
+  --shadow-md: 0 10px 28px -14px rgba(74, 58, 32, 0.35);
+
+  --nav-height: 4rem;
+  --content-width: 46rem;
+
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* An overscroll past the top of the document offers Safari's reload
+     affordance, and a refresh mid-OCR discards the scan without warning. */
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
+  /* Progressive enhancement: engines without `svh` keep 100vh, engines with it
+     take the second declaration. `100vh` alone is wrong on iOS because it
+     includes the area behind the collapsing toolbar. */
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--bg);
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a,
+button,
+summary,
+label {
+  /* Removes the default translucent overlay Android Chrome paints over every
+     tap, which sits badly on the beige/green surfaces. */
+  -webkit-tap-highlight-color: transparent;
+  /* Drops the up-to-300ms tap delay and stops a rapid double tap on a control
+     from zooming the page on iOS. */
+  touch-action: manipulation;
+  /* A long press on a control starts a text selection and raises the system
+     callout menu, which cancels the scroll gesture and reads as broken. Fields
+     and other genuinely selectable text opt back in below. */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+[contenteditable],
+.raw-text__body,
+.detail-fields__value {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/*
+ * Visually hidden but still announced. Used for the single app-wide live
+ * region, so it must not be `display: none` or `visibility: hidden`, both of
+ * which remove it from the accessibility tree.
+ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

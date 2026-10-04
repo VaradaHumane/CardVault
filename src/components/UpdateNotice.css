@@ -1,0 +1,37 @@
+/* Update and offline notices sit above the app content rather than over it, so
+   nothing is ever covered up while somebody is mid-scan. */
+
+.app__notices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1.5rem 1.25rem 0;
+}
+
+.app__notices .callout__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.app__notices .export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.app__notices .export-actions .button-primary,
+.app__notices .export-actions .button-secondary {
+  /* 2.75rem, matching every other button. This was 2.5rem (40px) while the
+     comment claimed 2.75rem. */
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 48rem) {
+  .app__notices {
+    padding: 2.5rem 2rem 0;
+  }
+}

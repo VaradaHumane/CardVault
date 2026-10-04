@@ -1,0 +1,69 @@
+.app {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.app__frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  background: var(--bg);
+}
+
+.app__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  /*
+   * The bottom nav is fixed and pads itself by `env(safe-area-inset-bottom)`, so
+   * this spacer has to reserve the same inset. Without it the last screenful of
+   * every screen sits underneath the iOS home indicator or the Android gesture
+   * bar. The `100%` fallback keeps the calc valid in engines without `env()`.
+   */
+  padding: 1.5rem 1.25rem
+    calc(var(--nav-height) + 2.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.app__panel[hidden] {
+  display: none;
+}
+
+.app__main:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -4rem;
+  z-index: 30;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s ease-in-out;
+}
+
+.skip-link:focus-visible {
+  top: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .app__frame {
+    border-inline: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .app__main {
+    gap: 1.75rem;
+    padding: 2.5rem 2rem 7rem;
+  }
+}

@@ -1,0 +1,76 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field__control {
+  /*
+   * When iOS scrolls a focused field into view the fixed bottom nav scrolls with
+   * it, so the two compete for the same strip above the keyboard. Reserving
+   * scroll margin keeps the control clear of the nav.
+   */
+  scroll-margin-block-end: 7rem;
+  scroll-margin-block-start: 5rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.field__control--multiline {
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.field__control::placeholder {
+  /* No opacity reduction: that put the placeholder at 3.07:1, below the 4.5:1
+     required for text. Placeholders are not exempt from the contrast minimum. */
+  color: var(--text-muted);
+}
+
+.field__control:hover {
+  border-color: var(--accent);
+}
+
+/*
+ * The tint alone was 1.17:1 against the panel and the border 1.37:1 against
+ * the tint, so a sighted user with low vision got no signal on the control
+ * boundary at all. The strong border is the visible cue; the tint is secondary.
+ */
+.field__control[aria-invalid='true'] {
+  border-color: var(--error-text);
+  box-shadow: inset 3px 0 0 0 var(--error-text);
+  background: var(--error-bg);
+}
+
+.field__issues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  font-size: 0.8125rem;
+}
+
+.field__issue--error {
+  color: var(--error-text);
+}
+
+.field__issue--warning {
+  color: var(--warning-text);
+}

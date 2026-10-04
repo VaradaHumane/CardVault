@@ -1,0 +1,48 @@
+# Response headers for Cloudflare Pages and Netlify.
+#
+# Both providers read a file called `_headers` from the publish directory and use
+# the same rule syntax, so this one file configures either host. Cloudflare does
+# add `X-Content-Type-Options: nosniff` by default; it is repeated here so the
+# file is also correct on a host that does not.
+#
+# Comments are kept outside the rule blocks: an indented line is a header to
+# these parsers, so a `#` line inside a block risks being read as a malformed
+# header rather than as a comment.
+#
+# Verified against provider documentation in September 2026. Cloudflare's own
+# guidance is to avoid adding custom caching at all, because its CDN already
+# revalidates with ETags and aggressive rules can pin a stale asset after a
+# deploy. The rules below are limited to the cases that actually matter for an
+# offline-first PWA: the shell and the worker must never be held in the HTTP
+# cache, fingerprinted assets can be cached forever, and the OCR payloads must
+# stay revalidatable because their filenames are stable across versions.
+
+# CardVault holds contacts in IndexedDB and never sends them anywhere. No page
+# should be able to leak a referring URL, be framed, or prompt for a sensor the
+# app does not use: the camera is reached through <input type="file" capture>,
+# not getUserMedia, so denying it costs nothing today.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# The service worker decides when a new version is applied, and the app keeps
+# skipWaiting off on purpose so an in-progress scan is never interrupted. That
+# only works if the browser can always see the current sw.js.
+/sw.js
+  Cache-Control: no-cache
+
+# Same reasoning for the app shell: a new deploy has to be visible immediately,
+# otherwise the shell and the worker disagree about which assets exist.
+/index.html
+  Cache-Control: no-cache
+
+# Vite fingerprints these filenames, so the contents at a given URL never change.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The OCR language data and core are large but their filenames are stable, so
+# they must stay revalidatable: a new OCR version can replace a file in place.
+/ocr/*
+  Cache-Control: public, max-age=86400, must-revalidate

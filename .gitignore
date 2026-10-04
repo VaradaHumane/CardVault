@@ -1,0 +1,49 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment files. CardVault has no server and needs no secrets today; this
+# is here so that the first person who adds one does not publish it.
+.env
+.env.*
+!.env.example
+
+# Build and tooling caches
+*.tsbuildinfo
+.vite/
+coverage/
+
+# Local working notes, kept on this machine only. audit.md is an internal
+# security review: it is incomplete and it records an absolute path to this
+# user's home directory, neither of which belongs in a public repository.
+# Delete this line to publish it.
+/audit.md
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Deliberately NOT ignored, because a fresh clone needs them to build and to run
+# OCR offline:
+#   eng.traineddata  the uncompressed language model that scripts/sync-ocr-assets.mjs
+#                    gzips into public/ocr/eng.traineddata.gz
+#   public/ocr/      the engine, WASM cores and language model the app fetches
+#                    at runtime; Vite only serves what it can see
+#   package-lock.json

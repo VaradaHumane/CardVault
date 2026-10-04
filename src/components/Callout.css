@@ -1,0 +1,82 @@
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  color: var(--text);
+  font-size: 0.9375rem;
+}
+
+.callout__icon {
+  flex: none;
+  margin-top: 0.125rem;
+}
+
+.callout__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.callout__title {
+  font-weight: 600;
+}
+
+.callout__text {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.callout__text :is(p, ul, ol) {
+  margin: 0;
+}
+
+.callout__text ul {
+  padding-left: 1.125rem;
+}
+
+.callout__text li + li {
+  margin-top: 0.125rem;
+}
+
+.callout--info {
+  border-color: var(--border-strong);
+}
+
+.callout--info .callout__icon {
+  color: var(--accent);
+}
+
+.callout--success {
+  border-color: var(--accent-border);
+  background: var(--accent-tint);
+}
+
+.callout--success .callout__icon,
+.callout--success .callout__title {
+  color: var(--accent-strong);
+}
+
+.callout--warning {
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+}
+
+.callout--warning .callout__icon,
+.callout--warning .callout__title {
+  color: var(--warning-text);
+}
+
+.callout--error {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+
+.callout--error .callout__icon,
+.callout--error .callout__title {
+  color: var(--error-text);
+}

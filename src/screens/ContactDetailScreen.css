@@ -1,0 +1,221 @@
+/* Contact details: read view, edit form and delete confirmation. */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  align-self: flex-start;
+  /* 2.75rem keeps this at the same 44px touch target as every other control;
+     at 0.25rem padding it was roughly 30px tall. */
+  min-height: 2.75rem;
+  padding: 0.5rem 0.25rem 0.5rem 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back-link:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.back-link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.back-link:hover:not(:disabled) {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.detail-fields {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.detail-fields__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail-fields__row:first-child {
+  padding-top: 0.25rem;
+}
+
+.detail-fields__row:last-child {
+  padding-bottom: 0.25rem;
+  border-bottom: 0;
+}
+
+.detail-fields__term {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.detail-fields__icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+.detail-fields__icon svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.detail-fields__value {
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.detail-fields__text {
+  white-space: pre-line;
+}
+
+.detail-fields__link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  overflow-wrap: anywhere;
+  /*
+   * Each of these sits alone on its own row instead of inside a sentence, so the
+   * WCAG 2.2 "Target Size (Minimum)" exemption for links inline in text does not
+   * apply and the 24px floor is required. The bare line box measured 18px. These
+   * are the primary actions on this screen, so they get the same 44px target as
+   * every other control rather than the bare minimum.
+   */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+}
+
+.detail-fields__link:hover {
+  color: var(--accent-strong);
+}
+
+.detail-fields__empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-list--tight {
+  margin-top: 0.5rem;
+}
+
+.raw-text__meta {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.section-note {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Delete confirmation sits inline so the choice is unmissable on mobile. */
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1rem;
+  border: 1px solid var(--error-border);
+  border-radius: var(--radius-md);
+  background: var(--error-bg);
+}
+
+.confirm__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--error-text);
+}
+
+.confirm__body {
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.confirm__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+}
+
+.button-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--error-text);
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button-danger:hover:not(:disabled) {
+  background: #86341f;
+}
+
+.button-danger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (min-width: 40rem) {
+  .detail-fields__row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+  }
+
+  .detail-fields__term {
+    flex: none;
+    width: 11rem;
+  }
+
+  .detail-fields__value {
+    flex: 1;
+    text-align: right;
+  }
+
+  .detail-actions {
+    flex-direction: row;
+    align-items: center;
+    /* Three actions now share this row; wrap instead of overflowing. */
+    flex-wrap: wrap;
+  }
+
+  .confirm {
+    flex: 1;
+  }
+}
